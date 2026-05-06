@@ -4,7 +4,7 @@ set -e
 # =========================
 # KONFIGURASI
 # =========================
-DOCKER_MIN_VERSION="28"
+DOCKER_MIN_VERSION="29"
 
 echo "Memulai instalasi Docker & Portainer..."
 echo "----------------------------------------"
@@ -57,8 +57,8 @@ INSTALLED_DOCKER_VERSION=$(docker version --format '{{.Server.Version}}' | cut -
 
 if [ "$INSTALLED_DOCKER_VERSION" -lt "$DOCKER_MIN_VERSION" ]; then
   echo "  Versi Docker terlalu lama!"
-  echo "   Minimum : $DOCKER_MIN_VERSION"
-  echo "   Terpasang: $INSTALLED_DOCKER_VERSION"
+  echo "  Minimum : $DOCKER_MIN_VERSION"
+  echo "  Terpasang: $INSTALLED_DOCKER_VERSION"
   exit 1
 fi
 
@@ -72,21 +72,24 @@ docker compose version
 
 # Ambil IP utama perangkat
 SERVER_IP=$(ip route get 1 | awk '{print $7; exit}')
+SERVER_PORT=9443
+CONTAINER_NAME="portainer"
+CONTAINER_VOLUME="portainer_data"
 
 # =========================
 # INSTALL PORTAINER
 # =========================
 echo "Menginstall Portainer..."
 
-sudo docker volume create portainer_data
+sudo docker volume create $CONTAINER_VOLUME
 
 sudo docker run -d \
   --name=portainer \
   --restart=always \
   -p 8000:8000 \
-  -p 9443:9443 \
+  -p ${SERVER_PORT}:9443 \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v portainer_data:/data \
+  -v $CONTAINER_VOLUME:/data \
   portainer/portainer-ce:latest
 
 # =========================
@@ -95,7 +98,7 @@ sudo docker run -d \
 echo "----------------------------------------"
 echo "   Docker & Portainer berhasil diinstall"
 echo "   Akses Portainer Web:"
-echo "   https://${SERVER_IP}:9443"
+echo "   https://${SERVER_IP}:${SERVER_PORT}"
 echo "----------------------------------------"
 
 

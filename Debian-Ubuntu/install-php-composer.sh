@@ -6,7 +6,6 @@ set -e
 # =========================
 PHP_VERSION="8.4"
 
-
 # =========================
 # INSTALL PHP
 # =========================
@@ -53,7 +52,7 @@ sudo mv composer.phar /usr/local/bin/composer
 # =========================
 echo "----------------------------------------"
 echo "PHP     : $(php -v | head -n 1)"
-echo "Composer: $(composer --version)"
+echo "Composer: $(composer --version )"
 echo "----------------------------------------"
 echo " Instalasi PHP $PHP_VERSION & Composer selesai"
 
