@@ -1,6 +1,7 @@
-# Kumpulan Script LINUX (Debian & Ubuntu)
+# Kumpulan Script LINUX
 
-Repo ini menyimpan sekumpulan skrip shell yang ditujukan untuk mengotomasi tugas administrasi dan pemeliharaan pada sistem berbasis Debian/Ubuntu.
+Repo ini menyimpan sekumpulan skrip shell yang ditujukan untuk mengotomasi tugas administrasi dan pemeliharaan pada sistem berbasis Debian/Red Hat.
+
 
 Fungsi umum skrip di repo ini:
 - Menginstal paket dan dependensi yang sering dipakai pada mesin pengembang atau server.

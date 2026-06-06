@@ -2,19 +2,41 @@
 set -e
 
 # ===================== Head Init Program =========================
+# Warna untuk output
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
 root() {
     exec "$0"
 }
 
 line() {
-  echo " ============================= "
+    local color="${1:-$NC}"
+    echo -e "${color}==============================${NC}"
+    # line "$GREEN"
+    # line "$RED"
+    # line "$YELLOW"
+}
+
+log_info() {
+    echo -e "${GREEN}[INFO] $1${NC}"
+}
+
+log_error() {
+    echo -e "${RED}[ERROR] $1${NC}"
+}
+
+log_warn() {
+    echo -e "${YELLOW}[WARN]${NC} $1"
 }
 
 header() {
     local title="$1"
-    line
+    line "$GREEN"
     echo " $title "
-    line
+    line "$GREEN"
 }
 
 countsleep() {
@@ -44,17 +66,17 @@ pause() {
 
 install() {
     header " Instalasi Diproses "
-    loopexe
+    pause
 }
 
 remove () {
     header " Remove Diproses "
-    loopexe
+    pause
 }
 
 cek () {
     header " Cek Diproses "
-    loopexe
+    pause
 }
 
 # ===================== Menu =========================
